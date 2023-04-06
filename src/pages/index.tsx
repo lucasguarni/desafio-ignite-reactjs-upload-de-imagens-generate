@@ -30,13 +30,11 @@ export default function Home(): JSX.Element {
   );
 
   const formattedData = useMemo(() => {
-    if (data) {
-      return data.pages.map(image => {
-        return image.data
-      });
-    }
+    const images = data?.pages.flatMap(image => {
+      return image.data.flat();
+    });
 
-    return [];
+    return images;
   }, [data]);
  
   // TODO RENDER ERROR SCREEN

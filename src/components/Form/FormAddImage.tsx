@@ -95,7 +95,6 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         });
         return;
       }
-      console.log(data)
       const response = await mutation.mutateAsync({url: imageUrl, title: String(data.title), description: String(data.description)});
       if (response) {
         toast({

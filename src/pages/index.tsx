@@ -25,7 +25,7 @@ export default function Home(): JSX.Element {
     'images',
     fetchImages,
     {
-      getNextPageParam: (lastPage) => lastPage.after
+      getNextPageParam: (lastPage) => lastPage?.after || null
     }
   );
 
@@ -38,12 +38,12 @@ export default function Home(): JSX.Element {
   }, [data]);
  
   // TODO RENDER ERROR SCREEN
-  if (isError) {
+  if (!isLoading && isError) {
     return <Error />
   }
   
   // TODO RENDER LOADING SCREEN
-  if (isLoading || isFetchingNextPage) {
+  if (isLoading && !isError) {
     return <Loading />
   }
 
@@ -53,7 +53,7 @@ export default function Home(): JSX.Element {
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
         <CardList cards={formattedData} />
-        {hasNextPage && <Button onClick={() => fetchNextPage}>Load more</Button>}
+        {hasNextPage && <Button role="button" onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>{isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}</Button>}
       </Box>
     </>
   );

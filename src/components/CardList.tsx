@@ -16,6 +16,7 @@ interface CardsProps {
 }
 
 export function CardList({ cards }: CardsProps): JSX.Element {
+  console.log(cards);
   // TODO MODAL USEDISCLOSURE
 
   // TODO SELECTED IMAGE URL STATE
